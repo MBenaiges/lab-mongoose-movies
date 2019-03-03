@@ -10,8 +10,10 @@ const data = require('./bin/seeds.js');
 
 const indexRouter = require('./routes/index');
 const celebritiesRouter = require('./routes/celebrities');
+const moviesRouter = require('./routes/movies');
 
 const Celebrity = require('./models/Celebrity');
+const Movie = require('./models/Movie');
 
 const app = express();
 
@@ -21,12 +23,12 @@ mongoose.connect('mongodb://localhost/movies', {
   reconnectTries: Number.MAX_VALUE
 });
 // --- INSERT CELEBRITIES ---
-// Celebrity.insertMany(data)
+// Movie.insertMany(data)
 //   .then(result => {
 //     console.log(result);
 //     mongoose.connection.close();
 //   })
-//   .catch(err => console.log(err));
+//  .catch(err => console.log(err));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -40,6 +42,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/celebrities', celebritiesRouter);
+app.use('/movies', moviesRouter);
 
 // -- 404 and error handler
 
